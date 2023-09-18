@@ -1,0 +1,45 @@
+﻿@using EntityLayer.Concrete
+@model List<Message2>
+
+@{
+    ViewData["Title"] = "Inbox";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<h1>Gelen Qutusu</h1>
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Mövzu</th>
+        <th>Göndərən</th>
+        <th>Tarix</th>
+        <th>Mesajı Aç</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.MessageID</td>
+            <td>@item.Subject</td>
+            <td>@item.SenderUser.WriterName</td>
+            <td>@item.MessageDate.ToString("dd.MM.yyyy")</td>
+
+            <td>
+                @if (@item.MessageStatus == true)
+                {
+                    <span class="badge badge-success">Aktiv</span>
+                }
+                else
+                {
+                    <span class="badge badge-outline-danger">Passiv</span>
+                }
+
+            </td>
+            <td><a href="/Message/MessageDetails/@item.MessageID" class="btn btn-warning">Mesajı Aç</a></td>
+        </tr>
+
+    }
+
+
+</table>
+
+
